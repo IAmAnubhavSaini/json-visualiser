@@ -4,7 +4,7 @@
   <title>Object Maker Sample</title>
   <style>
     .kv {
-      padding: 5px;
+      padding: 3px;
       margin: 5px;
       display: flex;
     }
@@ -13,6 +13,12 @@
     }
     .kv.l2 .key {
       border-left-color: #900;
+    }
+    .kv.l3 .key {
+      border-left-color: #c00;
+    }
+    .kv.l4 .key {
+      border-left-color: #F00;
     }
     .kv .key {
       border-left : thick solid #300;
@@ -119,9 +125,13 @@
 
     var jsonComplexArray = `{
       "name": [
-        { "name": "a", "value": "b" },
+        { "name": "a", "value": ["b", "c", "d"] },
         { "name": "b", "value": "bb" },
-        { "name": "c", "value": "bbb" },
+        { "name": "c", "value": [
+            { "id": "0", "val": "99" },
+            { "id": "1", "val": "199" },
+            { "id": "2", "val": "299" }
+        ] },
         { "name": "d", "value": "bbbb" }
       ]
     }`;
@@ -132,7 +142,7 @@
     function getObjectKeys (obj) {
       return Object.keys(obj);
     }
-    var jsobj = getJSObject(jsonComplexArray);
+    var jsobj = getJSObject(jsonMix);
 
     var keys = getObjectKeys(jsobj);
 
