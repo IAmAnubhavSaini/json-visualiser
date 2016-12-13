@@ -11,9 +11,7 @@
   var generateFullMap = function(key) { return createFullMap(jsobj, key, initialLevel); };
   var jsobj = getJSObject(jsonMix);
   var keys = getObjectKeys(jsobj);
-
-  (function writeOnDocument(keys) {
-    document.write(keys.map(generateFullMap).join(''));
-  })(keys);
+  var writeOnDocument = function (keys) { document.write(keys.map(generateFullMap).join('')); }
+  writeOnDocument(keys);
 
 })(window.OM || (window.OM = {}));
