@@ -1,159 +1,171 @@
-<script>
-
-var json = `{
-  "type": "object",
-  "$schema": "some schema url",
-  "title": "some title",
-  "description": "Some description.",
-  "properties": {
-    "id": {
-      "type": "string",
-      "format": "uint64",
-      "description": "Unique identifier."
-    },
-    "relative_id": {
-      "type": "string",
-      "description": "Idempotent key."
-    },
-    "handler": {
-      "type": "string",
-      "description": "Unique identifier.",
-      "readonly": true
-    },
-    "amount": {
-      "type": "object",
-      "$ref": "../amount.json",
-      "description": "The amount."
-    },
-    "fee": {
-      "type": "object",
-      "$ref": "../fee.json",
-      "description": "Th fee."
-    },
-    "date": {
-      "type": "string",
-      "description": "The date.",
-      "format": "date-time"
-    },
-    "payback": {
-      "type": "object",
-      "$ref": "../payback.json",
-      "description": "The return on investment."
-    },
-    "customer": {
-      "type": "string",
-      "description": "An issued customer account number."
-    },
-    "country": {
-      "type": "string",
-      "$ref": "../country.json",
-      "description": "A five letter country code."
-    },
-    "product": {
-      "$ref": "../product.json",
-      "description": "The product type."
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Object Maker Sample</title>
+  <style>
+    .kv {
+      padding: 5px;
+      margin: 5px;
+      display: flex;
     }
-  },
-  "required": [
-    "relative_id",
-    "amount",
-    "fee",
-    "payback",
-    "product",
-    "country",
-    "customer"
-  ]
-}`
+    .kv.l1 .key {
+      border-left-color: #600;
+    }
+    .kv.l2 .key {
+      border-left-color: #900;
+    }
+    .kv .key {
+      border-left : thick solid #300;
+      padding: 1px 10px;
+      font-weight: bold;
+    }
+    .kv .value .list { }
+    .kv .value .list .list-item {
+      pading: 2px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var jsonMix = `{
+      "type": "object",
+      "$schema": "some schema url",
+      "title": "some title",
+      "description": "Some description.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Unique identifier."
+        },
+        "relative_id": {
+          "type": "string",
+          "description": "Idempotent key."
+        },
+        "handler": {
+          "type": "string",
+          "description": "Unique identifier.",
+          "readonly": true
+        },
+        "amount": {
+          "type": "object",
+          "$ref": "../amount.json",
+          "description": "The amount."
+        },
+        "fee": {
+          "type": "object",
+          "$ref": "../fee.json",
+          "description": "Th fee."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date.",
+          "format": "date-time"
+        },
+        "payback": {
+          "type": "object",
+          "$ref": "../payback.json",
+          "description": "The return on investment."
+        },
+        "customer": {
+          "type": "string",
+          "description": "An issued customer account number."
+        },
+        "country": {
+          "type": "string",
+          "$ref": "../country.json",
+          "description": "A five letter country code."
+        },
+        "product": {
+          "$ref": "../product.json",
+          "description": "The product type."
+        }
+      },
+      "required": [
+        "relative_id",
+        "amount",
+        "fee",
+        "payback",
+        "product",
+        "country",
+        "customer"
+      ]
+    }`
 
-var jsonSample = `{
-    "glossary": {
-        "title": "example glossary",
-    "GlossDiv": {
-            "title": "S",
-      "GlossList": {
-                "GlossEntry": {
-                    "ID": "SGML",
-          "SortAs": "SGML",
-          "GlossTerm": "Standard Generalized Markup Language",
-          "Acronym": "SGML",
-          "Abbrev": "ISO 8879:1986",
-          "GlossDef": {
-                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
-            "GlossSeeAlso": ["GML", "XML"]
-                    },
-          "GlossSee": "markup"
+    var jsonSample = `{
+        "glossary": {
+            "title": "example glossary",
+        "GlossDiv": {
+                "title": "S",
+          "GlossList": {
+                    "GlossEntry": {
+                        "ID": "SGML",
+              "SortAs": "SGML",
+              "GlossTerm": "Standard Generalized Markup Language",
+              "Acronym": "SGML",
+              "Abbrev": "ISO 8879:1986",
+              "GlossDef": {
+                            "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                "GlossSeeAlso": ["GML", "XML"]
+                        },
+              "GlossSee": "markup"
+                    }
                 }
             }
         }
+    }`;
+
+    var jsonComplexArray = `{
+      "name": [
+        { "name": "a", "value": "b" },
+        { "name": "b", "value": "bb" },
+        { "name": "c", "value": "bbb" },
+        { "name": "d", "value": "bbbb" }
+      ]
+    }`;
+
+    function getJSObject (json) {
+      return JSON.parse(json);
     }
-}`;
+    function getObjectKeys (obj) {
+      return Object.keys(obj);
+    }
+    var jsobj = getJSObject(jsonMix);
 
-var jsonComplexArray = `{
-  "name": [
-    { "name": "a", "value": "b" },
-    { "name": "b", "value": "bb" },
-    { "name": "c", "value": "bbb" },
-    { "name": "d", "value": "bbbb" }
-  ]
-}`;
+    var keys = getObjectKeys(jsobj);
 
-var jsobj = JSON.parse(json)
+    function createArrayItemList(obj, key, level) {
+      var list = obj[key].map(function(x) {
+        return '<div class="list-item v">' + x + '</div>';
+      });
+      var val = '<div class="list">' + list.join('') + '</div>';
+      return val;
+    }
 
-var keys = Object.keys(jsobj)
+    function createFullMap(obj, key, level) {
+      var keyEl =  '<div class="key">' + key + '</div>';
+      var valEl;
+      var objKey = obj[key];
+      var typeofObjKey = typeof objKey;
+      if(typeofObjKey === typeof 'string') {
+        valEl = '<span class="v">' + objKey + '</span>';
+        // console.log(objKey, typeofObjKey, valEl, level);
+      }
+      else if(Array.isArray(objKey)){
+        valEl = createArrayItemList(obj, key, level);
+      }
+      else if(typeofObjKey === typeof {}) {
+        valEl = Object.keys(obj[key]).map(function(k) {
+          return createFullMap(obj[key], k, level + 1);
+        }).join('');
+      }
+      return '<div class="kv l' + level + '">' + keyEl + '<div class="value">' + valEl + '</div></div>';
+    }
 
-function createArrayItemList(obj, key, level) {
-  var list = obj[key].map(function(x) {
-    return '<div class="list-item v">' + x + '</div>';
-  });
-  var val = '<div class="list">' + list.join('') + '</div>';
-  return val;
-}
+    document.write(keys.map(function(key) {
+      return createFullMap(jsobj, key, 0);
+    }).join(''));
 
-function createFullMap(obj, key, level) {
-  var keyEl =  '<div class="key">' + key + '</div>';
-  var valEl;
-  var objKey = obj[key];
-  var typeofObjKey = typeof objKey;
-  if(typeofObjKey === typeof 'string') {
-    valEl = '<span class="v">' + objKey + '</span>';
-    // console.log(objKey, typeofObjKey, valEl, level);
-  }
-  else if(Array.isArray(objKey)){
-    valEl = createArrayItemList(obj, key, level);
-  }
-  else if(typeofObjKey === typeof {}) {
-    valEl = Object.keys(obj[key]).map(function(k) {
-      return createFullMap(obj[key], k, level + 1);
-    }).join('');
-  }
-  return '<div class="kv l' + level + '">' + keyEl + '<div class="value">' + valEl + '</div></div>';
-}
-
-document.write(keys.map(function(key) {
-  return createFullMap(jsobj, key, 0);
-}).join(''));
-
-</script>
-
-<style>
-  .kv {
-    padding: 5px;
-    margin: 5px;
-    display: flex;
-  }
-  .kv.l1 .key {
-    border-left-color: #600;
-  }
-  .kv.l2 .key {
-    border-left-color: #900;
-  }
-  .kv .key {
-    border-left : thick solid #300;
-    padding: 1px 10px;
-    font-weight: bold;
-  }
-  .kv .value .list { }
-  .kv .value .list .list-item {
-    pading: 2px;
-  }
-</style>
+  </script>
+</body>
+</html>
