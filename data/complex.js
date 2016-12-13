@@ -1,4 +1,6 @@
 (function (app) {
+  'use strict';
+
   app.DATA = app.DATA || {};
 
   app.DATA.jsonComplexArray = `{

@@ -1,5 +1,5 @@
 (function (app) {
-  app.ACTIONS = app.ACTIONS || {};
+  'use strict';
 
   var createArrayItemList = function (obj, key, level) {
     var valEl;
@@ -18,19 +18,17 @@
     var typeofObjKey = typeof objKey;
     if(typeofObjKey === typeof 'string') {
       valEl = '<span class="v">' + objKey + '</span>';
-      // console.log(objKey, typeofObjKey, valEl, level);
-    }
-    else if(Array.isArray(objKey)){
+    } else if(Array.isArray(objKey)){
       valEl = createArrayItemList(obj, key, level);
-    }
-    else if(typeofObjKey === typeof {}) {
-      valEl = Object.keys(obj[key]).map(function(k) {
-        return createFullMap(obj[key], k, level + 1);
+    } else if(typeofObjKey === typeof {}) {
+      valEl = Object.keys(objKey).map(function(k) {
+        return createFullMap(objKey, k, level + 1);
       }).join('');
     }
     return '<div class="kv l' + level + '">' + keyEl + '<div class="value">' + valEl + '</div></div>';
   };
 
+  app.ACTIONS = app.ACTIONS || {};
   app.ACTIONS.createArrayItemList = createArrayItemList;
   app.ACTIONS.createFullMap = createFullMap;
 
