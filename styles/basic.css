@@ -1,7 +1,28 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+#input {
+  height: 300px;
+  min-width: 600px;
+  width: 90%;
+  margin: 5%;
+
+}
+#input #json {
+  height: 100%;
+  width: 100%;
+  font-family: monospace;
+}
+
 .kv {
   padding: 3px;
   margin: 5px;
   display: flex;
+}
+.kv-item {
+  border-bottom: thin solid grey;
+  margin: 10px 0;
 }
 .kv.l1 .key {
   border-left-color: #600;
