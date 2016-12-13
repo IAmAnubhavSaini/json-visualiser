@@ -19,7 +19,9 @@
       padding: 1px 10px;
       font-weight: bold;
     }
-    .kv .value .list { }
+    .kv .value .list {
+      border-left: thin solid #009;
+    }
     .kv .value .list .list-item {
       pading: 2px;
     }
@@ -130,13 +132,15 @@
     function getObjectKeys (obj) {
       return Object.keys(obj);
     }
-    var jsobj = getJSObject(jsonMix);
+    var jsobj = getJSObject(jsonComplexArray);
 
     var keys = getObjectKeys(jsobj);
 
     function createArrayItemList(obj, key, level) {
-      var list = obj[key].map(function(x) {
-        return '<div class="list-item v">' + x + '</div>';
+      var valEl;
+      var list = obj[key].map(function(x, i, a) {
+        valEl = createFullMap(a, i, level + 1)
+        return '<div class="list-item v">' + valEl + '</div>';
       });
       var val = '<div class="list">' + list.join('') + '</div>';
       return val;
