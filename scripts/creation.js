@@ -16,7 +16,7 @@
     var valEl;
     var objKey = obj[key];
     var typeofObjKey = typeof objKey;
-    if(typeofObjKey === typeof 'string') {
+    if(typeofObjKey === typeof 0 || typeofObjKey === typeof 'string') {
       valEl = '<span class="v">' + objKey + '</span>';
     } else if(Array.isArray(objKey)){
       valEl = createArrayItemList(obj, key, level);
