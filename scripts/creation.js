@@ -22,18 +22,29 @@
            '</div>'
   }
 
+  var createLiteralValue = function (value) {
+    return '<span class="v">' + value + '</span>'
+  }
+  var literal = function (type) {
+    return type === 'number' || type === 'string' || type === 'boolean'
+  }
+  var array = function (value) {
+    return Array.isArray(value)
+  }
+  var object = function (type) {
+    return type === typeof {}
+  }
   var createFullMap = function (obj, key, level) {
     var keyEl = createKey(key)
     var valEl
-    var objKey = obj[key]
-    var typeofObjKey = typeof objKey
-    if(typeofObjKey === 'number' || typeofObjKey === 'string' || typeofObjKey === 'boolean') {
-      valEl = '<span class="v">' + objKey + '</span>'
-    } else if(Array.isArray(objKey)){
+    var value = obj[key]
+    if(literal(typeof value)) {
+      valEl = createLiteralValue(value)
+    } else if(array(value)){
       valEl = createArrayItemList(obj, key, level)
-    } else if(typeofObjKey === typeof {}) {
-      valEl = Object.keys(objKey).map(function(k) {
-        return createFullMap(objKey, k, level + 1)
+    } else if(object(typeof value)) {
+      valEl = Object.keys(value).map(function(k) {
+        return createFullMap(value, k, level + 1)
       }).join('')
     }
     return createKeyValPair(level, keyEl, valEl)
