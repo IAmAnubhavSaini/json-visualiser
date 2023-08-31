@@ -1,9 +1,9 @@
 (function (app) {
-  'use strict';
+    'use strict';
 
-  app.DATA = app.DATA || {};
+    app.DATA = app.DATA || {};
 
-  app.DATA.jsonSample = `{
+    app.DATA.jsonSample = `{
     "glossary": {
       "title": "example glossary",
       "GlossDiv": {

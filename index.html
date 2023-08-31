@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Object Maker Sample</title>
-  <link href="./styles/basic.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>JSON visualiser</title>
+    <link href="./styles/basic.css" rel="stylesheet">
 </head>
 <body>
-  <div id="input">
-    <textarea id="json" placeholder="Enter Valid JSON here."></textarea>
-    <button id="submit" onclick="window.OM.ACTIONS.generate();";>generate</button>
-  </div>
-  <div id="writable"></div>
-  <script defer src="./data/mixed.js"></script>
-  <script defer src="./data/sample.js"></script>
-  <script defer src="./data/complex.js"></script>
-  <script defer src="./scripts/creation.js"></script>
-  <script defer src="./scripts/run.js"></script>
+<div id="input">
+    <div class="json-input-container">
+        <label for="json">Input valid json:</label>
+        <textarea id="json" placeholder="Enter Valid JSON here."></textarea>
+    </div>
+    <div>
+        <button id="generate" onclick="window.OM.ACTIONS.generate();">generate</button>
+    </div>
+</div>
+<div id="writable"></div>
+<script defer src="./data/mixed.js"></script>
+<script defer src="./data/sample.js"></script>
+<script defer src="./data/complex.js"></script>
+<script defer src="./scripts/creation.js"></script>
+<script defer src="./scripts/run.js"></script>
 </body>
 </html>

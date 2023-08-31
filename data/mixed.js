@@ -1,9 +1,9 @@
 (function (app) {
-  'use strict';
+    'use strict';
 
-  app.DATA = app.DATA || {};
+    app.DATA = app.DATA || {};
 
-  app.DATA.jsonMix = `{
+    app.DATA.jsonMix = `{
   "type": "object",
   "$schema": "some schema url",
   "title": "some title",

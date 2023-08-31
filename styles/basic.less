@@ -1,61 +1,97 @@
-html, body {
+body {
   padding: 0;
   margin: 0;
 }
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 #input {
-  height: 300px;
+  height: 100%;
   min-width: 600px;
   width: 90%;
-  margin: 5%;
+  margin: 0 auto 20px;
+
   #json {
     height: 100%;
+    min-height: 400px;
     width: 100%;
+    min-width: 400px;
     font-family: monospace;
   }
-} 
+
+  button#generate {
+    margin: 10px 0;
+    padding: 5px 10px;
+    border: thin solid #000;
+    border-radius: 5px;
+    background-color: #eee;
+    cursor: pointer;
+    width: 200px;
+    height: 90px;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: #ddd;
+    }
+  }
+}
 
 .kv {
   padding: 3px;
   margin: 5px;
   display: flex;
+
   & .key {
-    border-left : thick solid #300;
+    border-left: thick solid #300;
     padding: 1px 10px;
     font-weight: bold;
   }
+
   & .value {
     .list {
       border-left: thin solid #009;
+
       .list-item {
         padding: 2px;
       }
-    } 
+    }
   }
+
   &-item {
     border-bottom: thin solid grey;
     margin: 10px 0;
   }
+
   &.l1 .key {
     border-left-color: #600;
   }
+
   &.l2 .key {
     border-left-color: #900;
   }
+
   &.l3 .key {
     border-left-color: #c00;
   }
+
   &.l4 .key {
     border-left-color: #F00;
   }
+
   &.l5 .key {
     border-left-color: #F60;
   }
+
   &.l6 .key {
     border-left-color: #F90;
   }
+
   &.l7 .key {
     border-left-color: #FC0;
   }
+
   &.l8 .key {
     border-left-color: #FF0;
   }

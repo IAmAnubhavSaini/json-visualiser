@@ -1,9 +1,9 @@
 (function (app) {
-  'use strict';
+    'use strict';
 
-  app.DATA = app.DATA || {};
+    app.DATA = app.DATA || {};
 
-  app.DATA.jsonComplexArray = `{
+    app.DATA.jsonComplexArray = `{
     "name": [
       { "name": "a", "value": ["b", "c", "d"] },
       { "name": "b", "value": "bb" },
